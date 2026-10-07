@@ -59,7 +59,7 @@ public class TestbedDiagnostic extends LinearOpMode {
             }
 
             // Motor and Servo Telemetry Output
-            telemetry.addData("--- HOME TESTBED ACTUATORS --- so basically it worked", "");
+            telemetry.addData("--- HOME TESTBED ACTUATORS --- so basically ya it worked", "");
             telemetry.addData("Motor Power", "%.2f", motorPower);
             telemetry.addData("Motor Encoder Position", testMotor.getCurrentPosition());
             telemetry.addData("Servo 1 Position", "%.2f", servo1.getPower());
