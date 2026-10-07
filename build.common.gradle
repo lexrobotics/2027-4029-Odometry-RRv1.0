@@ -79,7 +79,7 @@ android {
         matcher.find()
         def vName = matcher.group(1)
         //
-        versionCode vCode
+        versionCode 999
         versionName vName
     }
 
