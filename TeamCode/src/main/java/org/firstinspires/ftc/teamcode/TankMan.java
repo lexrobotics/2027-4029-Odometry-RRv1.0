@@ -23,18 +23,50 @@ public class TankMan extends  LinearOpMode{
 
         telemetry.addData("Its the Road Runner Up!", "Initialized! Lets do this!");
 
+        boolean joystickControls = false;
 
         waitForStart();
 
         while(opModeIsActive()){
 
-            Lback.setPower(.25);
-            Rback.setPower(.25);
-            Lfront.setPower(.25);
-            Rfront.setPower(.25);
-            if(gamepad1.a){
+            double motorPower = 0.75;
 
-            }
+                if(gamepad1.right_bumper){ // Switch between using and not joystick controls once we press the right bumper
+                    if(joystickControls){
+                        joystickControls = false;
+                    } else {
+                        joystickControls = true;
+                    }
+                }
+
+                if(joystickControls) {
+
+                } else {
+                    if (gamepad1.left_bumper) {
+                        motorPower = -motorPower;
+                    }
+
+                    if (gamepad1.a) {
+                        Lback.setPower(motorPower);
+                    } else {
+                        Lback.setPower(0);
+                    }
+                    if (gamepad1.b) {
+                        Lfront.setPower(motorPower);
+                    } else {
+                        Lfront.setPower(0);
+                    }
+                    if (gamepad1.x) {
+                        Rfront.setPower(motorPower);
+                    } else {
+                        Rfront.setPower(0);
+                    }
+                    if (gamepad1.y) {
+                        Rback.setPower(motorPower);
+                    } else {
+                        Rback.setPower(0);
+                    }
+                }
 
 
             telemetry.addData("\nThats crazy", "");
