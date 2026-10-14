@@ -4,7 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-
+// hey idiot
+// C:\Users\Super\Downloads\platform-tools-latest-windows\platform-tools\adb connect 192.168.43.1:5555
+//connect it wirelessly
 @TeleOp(name = "TankMan)", group = "TankDrive")
 public class TankMan extends  LinearOpMode{
 
