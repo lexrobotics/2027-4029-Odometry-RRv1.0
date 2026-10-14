@@ -42,7 +42,31 @@ public class TankMan extends  LinearOpMode{
                 }
 
                 if(joystickControls) {
+                    // Change everything before the "else" - right now its jsut a copy  of what's after the "else"
+                    if (gamepad1.left_bumper) {
+                        motorPower = -motorPower;
+                    }
 
+                    if (gamepad1.a) {
+                        Lback.setPower(motorPower);
+                    } else {
+                        Lback.setPower(0);
+                    }
+                    if (gamepad1.b) {
+                        Lfront.setPower(motorPower);
+                    } else {
+                        Lfront.setPower(0);
+                    }
+                    if (gamepad1.x) {
+                        Rfront.setPower(motorPower);
+                    } else {
+                        Rfront.setPower(0);
+                    }
+                    if (gamepad1.y) {
+                        Rback.setPower(motorPower);
+                    } else {
+                        Rback.setPower(0);
+                    }
                 } else {
                     if (gamepad1.left_bumper) {
                         motorPower = -motorPower;
