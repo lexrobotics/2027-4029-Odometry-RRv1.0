@@ -3,10 +3,19 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-
-// hey idiot
-// C:\Users\Super\Downloads\platform-tools-latest-windows\platform-tools\adb connect 192.168.43.1:5555
-//connect it wirelessly
+//
+//C:\Users\[YOUR LAPTOP USERNAME]\[Folder u put the sdk file in]\platform-tools-latest-windows\platform-tools\adb connect 192.168.43.1:5555
+//
+//use this to connect to the robot wirelessly
+//
+//step 1.
+//connect to the control hub's wifi
+//
+//step 2.
+//copy-paste the crazy string above into your andriod studio terminal, see bottom left of screen man
+//
+//step 3.
+//        if it says "connect to 192.168.43.1:5555" then u did it correctly
 @TeleOp(name = "TankMan)", group = "TankDrive")
 public class TankMan extends  LinearOpMode{
 
