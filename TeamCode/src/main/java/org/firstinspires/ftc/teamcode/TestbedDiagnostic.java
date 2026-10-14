@@ -45,7 +45,11 @@ public class TestbedDiagnostic extends LinearOpMode {
             double motorPower = -gamepad1.left_stick_y;
             testMotor.setPower(motorPower);
 
+
+
             // Servo Controls via Gamepad Buttons
+            // If you want to do 2 actions at once, then make it an "if" statement
+            // do not make it an "else if"
             if (gamepad1.a) {
                 servo1.setPower(1.0);
                 servo2.setPosition(1.0);
@@ -57,9 +61,12 @@ public class TestbedDiagnostic extends LinearOpMode {
                 servo1.setPower(0.0);
                 servo2.setPosition(0.5);
             }
+            if(gamepad1.y){
+                testMotor.setPower(1);
+            }
 
             // Motor and Servo Telemetry Output
-            telemetry.addData("--- HOME TESTBED ACTUATORS --- so basically ya it worked", "");
+            telemetry.addData("--- HOME TESTBED ACTUATORS --- yo it worked btw itd wireless", "");
             telemetry.addData("Motor Power", "%.2f", motorPower);
             telemetry.addData("Motor Encoder Position", testMotor.getCurrentPosition());
             telemetry.addData("Servo 1 Position", "%.2f", servo1.getPower());
