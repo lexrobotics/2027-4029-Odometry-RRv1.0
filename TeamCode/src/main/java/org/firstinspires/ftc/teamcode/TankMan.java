@@ -34,7 +34,7 @@ public class TankMan extends  LinearOpMode{
 
         telemetry.addData("Its the Road Runner Up!", "Initialized! Lets do this!");
 
-        boolean joystickControls = false;
+        boolean joystickControls = true;
 
         waitForStart();
 
@@ -44,13 +44,13 @@ public class TankMan extends  LinearOpMode{
             double leftStickY = gamepad1.left_stick_y;
             double leftStickX = gamepad1.left_stick_x;
 
-                if(gamepad1.right_bumper){ // Switch between using and not joystick controls once we press the right bumper
-                    if(joystickControls){
-                        joystickControls = false;
-                    } else {
-                        joystickControls = true;
-                    }
-                }
+//                if(gamepad1.right_bumper){ // Switch between using and not joystick controls once we press the right bumper
+//                    if(joystickControls){
+//                        joystickControls = false;
+//                    } else {
+//                        joystickControls = true;
+//                    }
+//                }
 
                 if(joystickControls) {
                     // Change everything before the "else" - right now its jsut a copy  of what's after the "else"
