@@ -53,10 +53,33 @@ public class TankMan extends  LinearOpMode{
 //                }
 
                 if(joystickControls) {
-                    Lback.setPower(leftStickY);
-                    Rback.setPower(leftStickY);
-                    Lfront.setPower(leftStickX);
-                    Rfront.setPower(leftStickX);
+                   // Lback.setPower(leftStickY);
+                   // Rback.setPower(leftStickY);
+                   // Lfront.setPower(leftStickX);
+                    //Rfront.setPower(leftStickX);
+
+                    if (gamepad1.left_stick_x <0){
+                        Rback.setPower(1);
+                        Rfront.setPower(1);
+                        Lback.setPower(-1);
+                        Lfront.setPower(-1);
+                    } else {
+                        Rback.setPower(0);
+                        Rfront.setPower(0);
+                        Lback.setPower(0);
+                        Lfront.setPower(0);
+                    }
+                    if (gamepad1.left_stick_x >0){
+                        Rback.setPower(-1);
+                        Rfront.setPower(-1);
+                        Lback.setPower(1);
+                        Lfront.setPower(1);
+                    } else {
+                        Rback.setPower(0);
+                        Rfront.setPower(0);
+                        Lback.setPower(0);
+                        Lfront.setPower(0);
+                    }
                 }
                 else {
                     if (gamepad1.left_bumper) {
@@ -83,6 +106,7 @@ public class TankMan extends  LinearOpMode{
                     } else {
                         Rback.setPower(0);
                     }
+
                 }
 
 
