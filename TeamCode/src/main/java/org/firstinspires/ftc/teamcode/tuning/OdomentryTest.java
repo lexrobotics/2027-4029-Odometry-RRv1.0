@@ -5,7 +5,6 @@
 */
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -24,9 +23,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  *
  * See the sensor's product page: https://www.sparkfun.com/products/24904
  */
-@TeleOp(name = "Sensor: SparkFun OTOS", group = "Sensor")
-@Disabled
-public class SensorSparkFunOTOS extends LinearOpMode {
+@TeleOp(name = "Sensor: SparkFun OTOS aka OdomentryTest...nice spelling", group = "Sensor")
+
+public class OdomentryTest extends LinearOpMode {
     // Create an instance of the sensor
     SparkFunOTOS myOtos;
 

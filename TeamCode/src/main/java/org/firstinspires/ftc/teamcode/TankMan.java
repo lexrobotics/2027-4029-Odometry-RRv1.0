@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 //
 //C:\Users\[YOUR LAPTOP USERNAME]\[Folder u put the sdk file in]\platform-tools-latest-windows\platform-tools\adb connect 192.168.43.1:5555
-//
+//EXAMPLE;   C:\Users\Super\Downloads\platform-tools-latest-windows\platform-tools\adb connect 192.168.43.1:5555
 //use this to connect to the robot wirelessly
 //
 //step 1.
@@ -41,6 +41,8 @@ public class TankMan extends  LinearOpMode{
         while(opModeIsActive()){
 
             double motorPower = 0.75;
+            double leftStickY = gamepad1.left_stick_y;
+            double leftStickX = gamepad1.left_stick_x;
 
                 if(gamepad1.right_bumper){ // Switch between using and not joystick controls once we press the right bumper
                     if(joystickControls){
@@ -55,28 +57,13 @@ public class TankMan extends  LinearOpMode{
                     if (gamepad1.left_bumper) {
                         motorPower = -motorPower;
                     }
+                    Lback.setPower(leftStickY);
+                    Rback.setPower(leftStickY);
+                    Lfront.setPower(leftStickX);
+                    Rfront.setPower(leftStickX);
 
-                    if (gamepad1.a) {
-                        Lback.setPower(motorPower);
-                    } else {
-                        Lback.setPower(0);
-                    }
-                    if (gamepad1.b) {
-                        Lfront.setPower(motorPower);
-                    } else {
-                        Lfront.setPower(0);
-                    }
-                    if (gamepad1.x) {
-                        Rfront.setPower(motorPower);
-                    } else {
-                        Rfront.setPower(0);
-                    }
-                    if (gamepad1.y) {
-                        Rback.setPower(motorPower);
-                    } else {
-                        Rback.setPower(0);
-                    }
-                } else {
+                }
+                else {
                     if (gamepad1.left_bumper) {
                         motorPower = -motorPower;
                     }
