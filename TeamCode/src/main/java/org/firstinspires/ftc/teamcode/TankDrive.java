@@ -236,8 +236,8 @@ public final class TankDrive {
         // TODO: make sure your config has motors with these names (or change them) - DONE for the 2026-27 Season
         //   add additional motors on each side if you have them - DONE for the 2026-27 Season
         //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
-        leftMotors = Arrays.asList(hardwareMap.get(DcMotorEx.class, "LeftForward"), hardwareMap.get(DcMotorEx.class, "LeftBack"));
-        rightMotors = Arrays.asList(hardwareMap.get(DcMotorEx.class, "RightForward"), hardwareMap.get(DcMotorEx.class, "RightBack"));
+        leftMotors = Arrays.asList(hardwareMap.get(DcMotorEx.class, "leftFront"), hardwareMap.get(DcMotorEx.class, "leftBack"));
+        rightMotors = Arrays.asList(hardwareMap.get(DcMotorEx.class, "rightFront"), hardwareMap.get(DcMotorEx.class, "rightBack"));
 
         for (DcMotorEx m : leftMotors) {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
