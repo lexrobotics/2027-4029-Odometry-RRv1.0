@@ -63,7 +63,7 @@ import java.util.List;
 public final class TankDrive {
     public static class Params {
         // IMU orientation
-        // TODO: fill in these values based on - DONE for the 2026-27 Season
+        // TODO: fill in these values based on - DONE for the 2026-27 season
         //   see https://ftc-docs.firstinspires.org/en/latest/programming_resources/imu/imu.html?highlight=imu#physical-hub-mounting
         public RevHubOrientationOnRobot.LogoFacingDirection logoFacingDirection =
                 RevHubOrientationOnRobot.LogoFacingDirection.UP;
@@ -71,7 +71,7 @@ public final class TankDrive {
                 RevHubOrientationOnRobot.UsbFacingDirection.RIGHT;
 
         // drive model parameters
-        public double inPerTick = 0;
+        public double inPerTick = 1.0;
         public double trackWidthTicks = 0;
 
         // feedforward parameters (in tick units)
@@ -152,7 +152,7 @@ public final class TankDrive {
                 this.rightEncs = Collections.unmodifiableList(rightEncs);
             }
 
-            // TODO: reverse encoder directions if needed
+            // TODO: reverse encoder directions if needed  -  DONE for the 2026-27 season because we are not using encoders for roadrunner
             //   leftEncs.get(0).setDirection(DcMotorSimple.Direction.REVERSE);
 
             this.pose = pose;
@@ -233,8 +233,8 @@ public final class TankDrive {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
 
-        // TODO: make sure your config has motors with these names (or change them) - DONE for the 2026-27 Season
-        //   add additional motors on each side if you have them - DONE for the 2026-27 Season
+        // TODO: make sure your config has motors with these names (or change them) - DONE for the 2026-27 season
+        //   add additional motors on each side if you have them - DONE for the 2026-27 season
         //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
         leftMotors = Arrays.asList(hardwareMap.get(DcMotorEx.class, "leftFront"), hardwareMap.get(DcMotorEx.class, "leftBack"));
         rightMotors = Arrays.asList(hardwareMap.get(DcMotorEx.class, "rightFront"), hardwareMap.get(DcMotorEx.class, "rightBack"));
@@ -246,8 +246,9 @@ public final class TankDrive {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
 
-        // TODO: reverse motor directions if needed
-        //   leftMotors.get(0).setDirection(DcMotorSimple.Direction.REVERSE);
+        // TODO: reverse motor directions if needed - DONE for the 2026-27 season
+        rightMotors.get(0).setDirection(DcMotorSimple.Direction.REVERSE);
+        rightMotors.get(1).setDirection(DcMotorSimple.Direction.REVERSE);
 
         // TODO: make sure your config has an IMU with this name (can be BNO or BHI)
         //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
@@ -256,6 +257,7 @@ public final class TankDrive {
 
         voltageSensor = hardwareMap.voltageSensor.iterator().next();
 
+        // Chaning localizer to our localizer of choice - DONE for the 2026-27 season
         localizer = new OTOSLocalizer(hardwareMap, pose); //new DriveLocalizer(pose);
 
         FlightRecorder.write("TANK_PARAMS", PARAMS);
