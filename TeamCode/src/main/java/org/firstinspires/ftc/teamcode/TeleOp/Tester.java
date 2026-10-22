@@ -45,6 +45,12 @@ public class Tester extends  LinearOpMode{
             double rightStickX = gamepad1.right_stick_x;
             double rightStickY = gamepad1.right_stick_y; // Reversed because the y-stick has up as negative y-values and down as positive y-values
 
+            if(leftStickY > 0.75 || leftStickY < -0.75){leftStickY-=0.1;}
+            if(leftStickX > 0.75 || leftStickX < -0.75){leftStickX-=0.1;}
+            if(rightStickY > 0.75 || rightStickY < -0.75){rightStickY-=0.1;}
+            if(rightStickX > 0.75 || rightStickX < -0.75){rightStickX-=0.1;}
+
+
             // Driving vertically forward
             if(leftStickY > 0.5){
                 leftFront.setPower(motorVelocity);
