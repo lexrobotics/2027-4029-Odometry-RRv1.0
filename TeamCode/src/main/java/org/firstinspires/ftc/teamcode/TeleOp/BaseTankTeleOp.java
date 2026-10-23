@@ -63,17 +63,17 @@ public class BaseTankTeleOp extends  LinearOpMode{
 
             // Driving horizontally to the right
             } else if(rightStickX > 0.5){ // Turing
-                leftFront.setPower(motorPower);
-                leftBack.setPower(motorPower);
-                rightFront.setPower(-motorPower);
-                rightBack.setPower(-motorPower);
-
-            // Driving horizontally to the left
-            } else if(rightStickX < -0.5){
                 leftFront.setPower(-motorPower);
                 leftBack.setPower(-motorPower);
                 rightFront.setPower(motorPower);
                 rightBack.setPower(motorPower);
+
+            // Driving horizontally to the left
+            } else if(rightStickX < -0.5){
+                leftFront.setPower(motorPower);
+                leftBack.setPower(motorPower);
+                rightFront.setPower(-motorPower);
+                rightBack.setPower(-motorPower);
 
             // to put the robot at rest so it doesn't slip around like an idiot
             } else {
