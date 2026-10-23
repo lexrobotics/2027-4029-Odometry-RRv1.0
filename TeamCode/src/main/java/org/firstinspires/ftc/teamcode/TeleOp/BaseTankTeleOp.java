@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class BaseTankTeleOp extends  LinearOpMode{
 
     private DcMotorEx leftBack, rightBack, leftFront, rightFront;
-    private double motorPower = 0.25; //%max valocity
+    private double motorPower = 0.25; // % of max valocity
 
     @Override
     public void runOpMode() throws  InterruptedException{
