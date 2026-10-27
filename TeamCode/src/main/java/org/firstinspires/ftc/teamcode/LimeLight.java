@@ -1,14 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.limelightvision.*;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 
 import java.util.List;
-@TeleOp
-public class LimeLight extends LinearOpMode {
+
+public class LimeLight {
     private Limelight3A lime;
 
     private int pipe = 3;
@@ -21,13 +20,15 @@ public class LimeLight extends LinearOpMode {
 //        pipe = pipeline;
 //    }
 
-    @Override
-    public void runOpMode() {
+    private HardwareMap hardwareMap;
+    private Telemetry telemetry;
 
-//        setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
-//        bot = new Bot(Setup.mechStates, Setup.sensorStates);
+    public LimeLight(HardwareMap hardwareMap, Telemetry telemetry) {
+        this.hardwareMap = hardwareMap;
+        this.telemetry = telemetry;
+    }
 
-
+    public void init() {
         lime = hardwareMap.get(Limelight3A.class, "lime");
         lime.setPollRateHz(30);
         lime.start();
@@ -37,55 +38,53 @@ public class LimeLight extends LinearOpMode {
         telemetry.addData("Pipeline", pipe);
         telemetry.addLine("LimeLight Ready");
         telemetry.update();
+    }
 
-        waitForStart();
+    public void loop(){
+        LLResult test = lime.getLatestResult();
+        if (test != null && test.isValid()) {
 
-        while (opModeIsActive()) {
-
-            LLResult test = lime.getLatestResult();
-            if (test != null && test.isValid()) {
-
-                if (pipe == 0 || pipe == 1 || pipe == 2) {
-                    telemetry.addLine("color detected");
+            if (pipe == 0 || pipe == 1 || pipe == 2) {
+                telemetry.addLine("color detected");
 
 
-                    double tx = test.getTx();
-                    double ty = test.getTy();
-                    double size = test.getTa();
+                double tx = test.getTx();
+                double ty = test.getTy();
+                double size = test.getTa();
 
 
-                    telemetry.addData("Pipline", pipe);
-                    telemetry.addData("Tx", "%.2f", tx);
-                    telemetry.addData("Ty", "%.2f", ty);
-                    telemetry.addData("Size", "%.2f",size);
+                telemetry.addData("Pipline", pipe);
+                telemetry.addData("Tx", "%.2f", tx);
+                telemetry.addData("Ty", "%.2f", ty);
+                telemetry.addData("Size", "%.2f",size);
 
-                } else if (pipe == 3) {
-                    List<LLResultTypes.FiducialResult> tags =
-                            test.getFiducialResults();
-                    telemetry.addData("aprilTags Dectected", tags.size()
-                    );
+            } else if (pipe == 3) {
+                List<LLResultTypes.FiducialResult> tags =
+                        test.getFiducialResults();
+                telemetry.addData("aprilTags Dectected", tags.size()
+                );
 
-                    for (int i = 0; i < tags.size(); i++) {
+                for (int i = 0; i < tags.size(); i++) {
 
-                        LLResultTypes.FiducialResult tag = tags.get(i);
-                        telemetry.addLine(
+                    LLResultTypes.FiducialResult tag = tags.get(i);
+                    telemetry.addLine(
                                 "____________________"
 
-                        );
-                        telemetry.addData("tag" + i + " ID", tag.getFiducialId());
+                    );
+                    telemetry.addData("tag" + i + " ID", tag.getFiducialId());
 
-                        telemetry.addData("tag" + i + " X", "%.2f", tag.getTargetXDegrees());
+                    telemetry.addData("tag" + i + " X", "%.2f", tag.getTargetXDegrees());
 
-                        telemetry.addData("tag" + i + "Y", "%.2f", tag.getTargetYDegrees());
+                    telemetry.addData("tag" + i + "Y", "%.2f", tag.getTargetYDegrees());
 
-                        telemetry.addData("tag" + i + "Area", "%.2f", tag.getTargetArea());
+                    telemetry.addData("tag" + i + "Area", "%.2f", tag.getTargetArea());
 
-                        telemetry.addData("tag" + i + "Family", tag.getFamily());
+                    telemetry.addData("tag" + i + "Family", tag.getFamily());
 
-
-                    }
 
                 }
+
+            }
 
             } else {
                 if (pipe == 3)
@@ -97,9 +96,11 @@ public class LimeLight extends LinearOpMode {
             }
 
             telemetry.update();
-            sleep(30);
+
         }
 
-        lime.stop();
+        public void stop() {
+            lime.stop();
+        }
+
     }
-}
