@@ -58,6 +58,20 @@ public class LimeLight {
                 telemetry.addData("Ty", "%.2f", ty);
                 telemetry.addData("Size", "%.2f",size);
 
+                int idealY = 69;
+                int idealX = 420;
+
+                while(ty > idealY+5 || ty < idealY-5) {
+                    //move up or dor smth maybe
+                    break;
+                }
+                while(tx > idealX+15 || tx < idealX-15) {
+                    //move left  or right or  smth maybe
+                    break;
+                }
+
+            }
+
             } else if (pipe == 3) {
                 List<LLResultTypes.FiducialResult> tags =
                         test.getFiducialResults();
@@ -82,8 +96,6 @@ public class LimeLight {
                     telemetry.addData("tag" + i + "Family", tag.getFamily());
 
 
-                }
-
             }
 
             } else {
@@ -95,9 +107,16 @@ public class LimeLight {
 
             }
 
+
+
+
+
             telemetry.update();
 
         }
+
+
+
 
         public void stop() {
             lime.stop();
