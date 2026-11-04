@@ -75,8 +75,8 @@ public final class TankDrive {
         public double trackWidthTicks = 0;
 
         // feedforward parameters (in tick units)
-        public double kS = 0;
-        public double kV = 0;
+        public double kS =1.0357050816186615;
+        public double kV =0.1266964459224155;
         public double kA = 0;
 
         // path profile parameters (in inches)
