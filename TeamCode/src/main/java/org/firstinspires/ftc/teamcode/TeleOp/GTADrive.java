@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp(name = "GTA drive", group = "TankDrive")
-public class Tester extends  LinearOpMode{
+public class GTADrive extends  LinearOpMode{
 
     private DcMotorEx leftBack, rightBack, leftFront, rightFront;
     private double motorVelocity = 2464.0;
@@ -40,8 +40,8 @@ public class Tester extends  LinearOpMode{
         waitForStart();
 
         while(opModeIsActive()){
-            double leftStickX = gamepad1.left_stick_x;
-            double leftStickY = -gamepad1.left_stick_y; // Reversed because the y-stick has up as negative y-values and down as positive y-values
+            double leftStickX = -gamepad1.left_stick_x;
+            double leftStickY = gamepad1.left_stick_y; // Reversed because the y-stick has up as negative y-values and down as positive y-values
             // double rightStickX = gamepad1.right_stick_x;
             // double rightStickY = gamepad1.right_stick_y; // Reversed because the y-stick has up as negative y-values and down as positive y-values
 
