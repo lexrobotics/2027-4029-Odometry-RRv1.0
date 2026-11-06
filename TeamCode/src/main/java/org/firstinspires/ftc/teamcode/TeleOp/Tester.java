@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp(name = "BaseTankTeleOp", group = "TankDrive")
+@TeleOp(name = "GTA drive", group = "TankDrive")
 public class Tester extends  LinearOpMode{
 
     private DcMotorEx leftBack, rightBack, leftFront, rightFront;
@@ -35,57 +35,33 @@ public class Tester extends  LinearOpMode{
         rightFront.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         rightBack.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
-        telemetry.addData("Its the Base Tank Drive TeleOp!", "Initialized! Lets do this!");
+        telemetry.addData("Its time to drive like its GTA 5!!", "As mlg said, 'It's driving time.'");
 
         waitForStart();
 
         while(opModeIsActive()){
             double leftStickX = gamepad1.left_stick_x;
-            double leftStickY = gamepad1.left_stick_y; // Reversed because the y-stick has up as negative y-values and down as positive y-values
-            double rightStickX = gamepad1.right_stick_x;
-            double rightStickY = gamepad1.right_stick_y; // Reversed because the y-stick has up as negative y-values and down as positive y-values
+            double leftStickY = -gamepad1.left_stick_y; // Reversed because the y-stick has up as negative y-values and down as positive y-values
+            // double rightStickX = gamepad1.right_stick_x;
+            // double rightStickY = gamepad1.right_stick_y; // Reversed because the y-stick has up as negative y-values and down as positive y-values
 
-            if(leftStickY > 0.75 || leftStickY < -0.75){leftStickY-=0.1;}
-            if(leftStickX > 0.75 || leftStickX < -0.75){leftStickX-=0.1;}
-            if(rightStickY > 0.75 || rightStickY < -0.75){rightStickY-=0.1;}
-            if(rightStickX > 0.75 || rightStickX < -0.75){rightStickX-=0.1;}
+            double leftPower = leftStickY + leftStickX;
+            double rightPower = leftStickY - leftStickX;
 
+            double biggerPower = Math.max(Math.abs(leftPower), Math.abs(rightPower));
 
-            // Driving vertically forward
-            if(leftStickY > 0.5){
-                leftFront.setPower(motorVelocity);
-                leftBack.setPower(motorVelocity);
-                rightFront.setPower(motorVelocity);
-                rightBack.setPower(motorVelocity);
-
-                // Driving vertically backward
-            } else if(leftStickY < -0.5){
-                leftFront.setPower(-motorVelocity);
-                leftBack.setPower(-motorVelocity);
-                rightFront.setPower(-motorVelocity);
-                rightBack.setPower(-motorVelocity);
-
-                // Driving horizontally to the right
-            } else if(rightStickX > 0.5){ // Turing
-                leftFront.setPower(motorVelocity);
-                leftBack.setPower(motorVelocity);
-                rightFront.setPower(-motorVelocity);
-                rightBack.setPower(-motorVelocity);
-
-                // Driving horizontally to the left
-            } else if(rightStickX < -0.5){
-                leftFront.setPower(-motorVelocity);
-                leftBack.setPower(-motorVelocity);
-                rightFront.setPower(motorVelocity);
-                rightBack.setPower(motorVelocity);
-
-                // to put the robot at rest so it doesn't slip around like an idiot
-            } else {
-                leftFront.setPower(0);
-                leftBack.setPower(0);
-                rightFront.setPower(0);
-                rightBack.setPower(0);
+            if(biggerPower > 1.0){
+                leftPower /= biggerPower;
+                rightPower /= biggerPower;
             }
+
+            leftFront.setPower(leftPower);
+            leftBack.setPower(leftPower);
+
+            rightFront.setPower(rightPower);
+            rightFront.setPower(rightPower);
+
+
 
             telemetry.addData("leftFront", leftFront);
             telemetry.addData("\nleftBack", leftBack);
