@@ -16,7 +16,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 public class OTOSLocalizer implements Localizer {
     public static class Params {
         public double angularScalar = 0.9939;
-        public double linearScalar = 1.0833;
+
+        public double linearScalar = 1.0;//30/39;//1.0;//1.0833;
+        //THE MAX FOR LINEAR AND ANGULAR SCALAR IS 1.127
+        //THE MIN FOR LINEAR AND ANGULAR SCALAR IS 0.872
+        //IF IT IS ABOVE IT, IT WILL RESET BACK TO 1.0
+        //DONT FORGET IT.
 
         // Note: units are in inches(x, y) and radians (h)
         public SparkFunOTOS.Pose2D offset = new SparkFunOTOS.Pose2D(-1, 0.5, -1.673);
@@ -35,11 +40,12 @@ public class OTOSLocalizer implements Localizer {
         otos.setPosition(OTOSKt.toOTOSPose(currentPose));
         otos.setLinearUnit(DistanceUnit.INCH);
         otos.setAngularUnit(AngleUnit.RADIANS);
+        otos.setOffset(PARAMS.offset);
 
-        otos.calibrateImu();
         otos.setLinearScalar(PARAMS.linearScalar);
         otos.setAngularScalar(PARAMS.angularScalar);
-        otos.setOffset(PARAMS.offset);
+        otos.calibrateImu();
+
     }
 
     @Override
