@@ -59,7 +59,7 @@ public class GTADrive extends  LinearOpMode{
             leftBack.setPower(leftPower);
 
             rightFront.setPower(rightPower);
-            rightFront.setPower(rightPower);
+            rightBack.setPower(rightPower);
 
 
 
