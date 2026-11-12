@@ -10,6 +10,7 @@ public class GTADrive extends  LinearOpMode{
 
     private DcMotorEx leftBack, rightBack, leftFront, rightFront;
     private double motorVelocity = 2464.0;
+    private boolean[] precisionDrive = {false};
 
     @Override
     public void runOpMode() throws  InterruptedException{
@@ -55,11 +56,32 @@ public class GTADrive extends  LinearOpMode{
                 rightPower /= biggerPower;
             }
 
-            leftFront.setPower(leftPower);
-            leftBack.setPower(leftPower);
+            if(gamepad1.left_trigger_pressed) {
+                precisionDrive[0] = false;
+            }
+            if(gamepad1.right_trigger_pressed){
+                precisionDrive[0] = true;
+            }
 
-            rightFront.setPower(rightPower);
-            rightBack.setPower(rightPower);
+            if(precisionDrive[0] == true){
+                leftFront.setVelocity(motorVelocity*leftPower/10);
+                leftBack.setVelocity(motorVelocity*leftPower/10);
+
+                rightFront.setPower(motorVelocity*rightPower/10);
+                rightBack.setPower(motorVelocity*rightPower/10);
+            }
+            else if(precisionDrive[0] == false){
+                leftFront.setVelocity(motorVelocity * leftPower);
+                leftBack.setVelocity(motorVelocity * leftPower);
+
+                rightFront.setPower(motorVelocity/15 * rightPower);
+                rightBack.setPower(motorVelocity/15 * rightPower);
+            }
+
+
+
+
+
 
 
 
