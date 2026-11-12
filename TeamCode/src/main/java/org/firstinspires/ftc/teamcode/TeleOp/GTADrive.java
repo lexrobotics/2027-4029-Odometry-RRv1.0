@@ -74,8 +74,8 @@ public class GTADrive extends  LinearOpMode{
                 leftFront.setVelocity(motorVelocity * leftPower);
                 leftBack.setVelocity(motorVelocity * leftPower);
 
-                rightFront.setPower(motorVelocity/15 * rightPower);
-                rightBack.setPower(motorVelocity/15 * rightPower);
+                rightFront.setPower(motorVelocity * rightPower);
+                rightBack.setPower(motorVelocity * rightPower);
             }
 
 
