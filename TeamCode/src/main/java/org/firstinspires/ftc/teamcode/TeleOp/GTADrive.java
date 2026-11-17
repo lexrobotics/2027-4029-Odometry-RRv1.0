@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 public class GTADrive extends  LinearOpMode{
 
     private DcMotorEx leftBack, rightBack, leftFront, rightFront;
-    private double motorVelocity = 2464.0;
-    private boolean[] precisionDrive = {false};
+    private double motorVelocity = 2464.0/2;
+    private boolean[] driveMode = {false, false};
 
     @Override
     public void runOpMode() throws  InterruptedException{
@@ -57,33 +57,38 @@ public class GTADrive extends  LinearOpMode{
             }
 
             if(gamepad1.left_trigger_pressed) {
-                precisionDrive[0] = false;
-            }
-            if(gamepad1.right_trigger_pressed){
-                precisionDrive[0] = true;
+                if(driveMode[0] == true) {
+                    driveMode[0] = false;
+                }
+                else if(driveMode[0] == false){
+                    driveMode[0] = true;
+                }
             }
 
-            if(precisionDrive[0] == true){
+            if(gamepad1.right_trigger_pressed){
+                driveMode[1]=false;
+            }
+            if(driveMode[0] == true && driveMode[1] == false){ // Slow mode
                 leftFront.setVelocity(motorVelocity*leftPower/10);
                 leftBack.setVelocity(motorVelocity*leftPower/10);
 
-                rightFront.setPower(motorVelocity*rightPower/10);
-                rightBack.setPower(motorVelocity*rightPower/10);
+                rightFront.setVelocity(motorVelocity*rightPower/10);
+                rightBack.setVelocity(motorVelocity*rightPower/10);
             }
-            else if(precisionDrive[0] == false){
+            else if(driveMode[0] == false && driveMode[1] == false){ // Fast mode
                 leftFront.setVelocity(motorVelocity * leftPower);
                 leftBack.setVelocity(motorVelocity * leftPower);
 
-                rightFront.setPower(motorVelocity * rightPower);
-                rightBack.setPower(motorVelocity * rightPower);
+                rightFront.setVelocity(motorVelocity * rightPower);
+                rightBack.setVelocity(motorVelocity * rightPower);
             }
+            else if(driveMode[1]){
+                leftFront.setVelocity(motorVelocity*2 * leftPower);
+                leftBack.setVelocity(motorVelocity*2 * leftPower);
 
-
-
-
-
-
-
+                rightFront.setVelocity(motorVelocity*2 * rightPower);
+                rightBack.setVelocity(motorVelocity*2 * rightPower);
+            }
 
             telemetry.addData("leftFront", leftFront);
             telemetry.addData("\nleftBack", leftBack);
