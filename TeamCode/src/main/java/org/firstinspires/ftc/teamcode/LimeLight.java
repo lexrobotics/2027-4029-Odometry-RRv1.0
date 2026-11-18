@@ -52,6 +52,8 @@ public class LimeLight {
                 telemetry.addLine("color detected");
 
 
+
+
                 double tx = test.getTx();
                 double ty = test.getTy();
                 double size = test.getTa();
@@ -83,6 +85,7 @@ public class LimeLight {
                 List<LLResultTypes.FiducialResult> tags =
                         test.getFiducialResults();
                 telemetry.addData("aprilTags Dectected", tags.size());
+                telemetry.addData("pipeline", pipe);
 
                 if (tags.isEmpty()) {
                     telemetry.addData("AprilTag", "No apriltag detected ");
@@ -107,22 +110,25 @@ public class LimeLight {
 
                     Pose3D pose = tag.getTargetPoseCameraSpace();
 
-                    if (pose == null) {
-
+                    if (pose == null ) {
                         telemetry.addLine("3d position in null");
                     } else {
+
+                        telemetry.addData("pose", pose);
 
                         Position position = pose.getPosition();
 
                         Position inches = position.toUnit(DistanceUnit.INCH);
 
-                        double cameraX = inches.x;
-                        double cameraY = inches.y;
-                        double cameraZ = inches.z;
+                        double cameraX = pose.getPosition().x;//inches.x;
+                        double cameraY = pose.getPosition().y;//inches.y;
+                        double cameraZ = pose.getPosition().z;//inches.z;
 
                         telemetry.addData("CameraX", "%.2f", cameraX);
                         telemetry.addData("CameraY", "%.2f", cameraY);
                         telemetry.addData("CameraZ", "%.2f", cameraZ);
+                        telemetry.addData("\nPosition print: ", position);
+
 
 
 
