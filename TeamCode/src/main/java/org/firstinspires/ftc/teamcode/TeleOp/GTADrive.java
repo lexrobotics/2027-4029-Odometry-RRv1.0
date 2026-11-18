@@ -56,7 +56,7 @@ public class GTADrive extends  LinearOpMode{
                 rightPower /= biggerPower;
             }
 
-            if(gamepad1.left_trigger_pressed) {
+            if(gamepad1.leftTriggerWasPressed()) {
                 if(driveMode[0] == true) {
                     driveMode[0] = false;
                 }
@@ -65,7 +65,7 @@ public class GTADrive extends  LinearOpMode{
                 }
             }
 
-            if(gamepad1.right_trigger_pressed){
+            if(gamepad1.rightTriggerWasPressed()){
                 driveMode[1]=false;
             }
             if(driveMode[0] == true && driveMode[1] == false){ // Slow mode
