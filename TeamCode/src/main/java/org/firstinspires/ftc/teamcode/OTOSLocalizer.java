@@ -15,11 +15,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 @Config
 public class OTOSLocalizer implements Localizer {
     public static class Params {
-        public double angularScalar =.9976;
-        public double linearScalar = 1.127;
+        public double angularScalar = 1;
+        public double linearScalar = 1;
 
         // Note: units are in inches(x, y) and radians (h)
-        public SparkFunOTOS.Pose2D offset = new SparkFunOTOS.Pose2D(-1, 0.5, -1.673);
+        public SparkFunOTOS.Pose2D offset = new SparkFunOTOS.Pose2D(0, 0, 0);
     }
 
     public static Params PARAMS = new Params();
