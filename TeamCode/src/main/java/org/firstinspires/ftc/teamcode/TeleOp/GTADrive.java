@@ -94,6 +94,7 @@ public class GTADrive extends  LinearOpMode{
             telemetry.addData("\nleftBack", leftBack);
             telemetry.addData("\nrightFront", rightFront);
             telemetry.addData("\nrightBack", rightBack);// Finish telemetry
+            telemetry.update();
         }
     }
 }
