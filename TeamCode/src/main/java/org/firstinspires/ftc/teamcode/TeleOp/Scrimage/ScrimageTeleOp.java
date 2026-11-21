@@ -22,8 +22,10 @@ public class ScrimageTeleOp extends  LinearOpMode{
 
     private double outtakePercentVelocity = 0.5; // Change as needed
     private double intakePercentVelocity = 0.75;  // Change as needed
-    private double transferRestPosition = 0.0; // Change as needed
-    private double transferPushPosition = 1.0; // Change as needed
+    private double transferPushPosition = 0.464; // Change as needed
+    private double transferRestPosition = 0.7215; // Change as needed
+    private double amount = 0.0005;
+    private double position = transferRestPosition;
 
     @Override
     public void runOpMode() throws  InterruptedException {
@@ -36,7 +38,8 @@ public class ScrimageTeleOp extends  LinearOpMode{
 
         // Reverses the necessary wheel motors so that they move in the same direction (forward when positive power is given)
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        //rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Sets all the wheel motors to stop moving immediately instead of gently slowing down when the power is 0
         leftFront.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
@@ -56,7 +59,7 @@ public class ScrimageTeleOp extends  LinearOpMode{
         transfer = hardwareMap.get(Servo.class, "transfer");
 
         //outtake.setDirection(DcMotorSimple.Direction.REVERSE);  // if applicable
-        //intake.setDirection(DcMotorSimple.Direction.REVERSE);   // if applicable
+        intake.setDirection(DcMotorSimple.Direction.REVERSE);   // if applicable
         //transfer.setDirection(Servo.Direction.REVERSE;          // if applicable
 
         outtake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -66,7 +69,6 @@ public class ScrimageTeleOp extends  LinearOpMode{
         intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         transfer.setPosition(transferRestPosition);
-
 
         telemetry.addLine("Initialized!");
 
@@ -136,6 +138,13 @@ public class ScrimageTeleOp extends  LinearOpMode{
             } else {
                 intake.setPower(0);
             }
+
+            if(gamepad2.right_bumper){
+                position += amount;
+            } else if(gamepad2.left_bumper){
+                position -= amount;
+            }
+            transfer.setPosition(position);
         }
     }
 }
