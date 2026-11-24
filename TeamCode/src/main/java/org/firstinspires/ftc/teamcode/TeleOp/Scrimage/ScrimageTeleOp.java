@@ -37,9 +37,9 @@ public class ScrimageTeleOp extends  LinearOpMode{
         rightBack = hardwareMap.get(DcMotorEx.class, "rightBack"); // Right back motor
 
         // Reverses the necessary wheel motors so that they move in the same direction (forward when positive power is given
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        //leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        //rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         //rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
 

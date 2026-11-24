@@ -11,8 +11,9 @@ public class ServoTest extends LinearOpMode{
 
     Servo servo;
     double position = 0.0;
-    // start = 0.179, end
+    // start = 0.404, end
     double amount = 0.0005;
+    //0.7915, rest value
 
     @Override
     public void runOpMode() throws InterruptedException {
