@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.TeleOp.Scrimage;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -18,11 +18,14 @@ public class ScrimageTeleOp extends  LinearOpMode{
     //Mechanisms
     private DcMotor intake;
     private DcMotor outtake;
-    private CRServo transfer;
+    private Servo transfer;
 
     private double outtakePercentVelocity = 0.5; // Change as needed
     private double intakePercentVelocity = 0.75;  // Change as needed
-    private double transferPushPower = 0.1; // Change as needed
+    private double transferPushPosition = 0.464; // Change as needed
+    private double transferRestPosition = 0.7215; // Change as needed
+    private double amount = 0.0005;
+    private double position = transferRestPosition;
 
     @Override
     public void runOpMode() throws  InterruptedException {
@@ -33,11 +36,12 @@ public class ScrimageTeleOp extends  LinearOpMode{
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront"); // Right front motor
         rightBack = hardwareMap.get(DcMotorEx.class, "rightBack"); // Right back motor
 
-        // Reverses the necessary wheel motors so that they move in the same direction (forward when positive power is given)
-        //rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        //rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        // Reverses the necessary wheel motors so that they move in the same direction (forward when positive power is given
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        //rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        //rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         // Sets all the wheel motors to stop moving immediately instead of gently slowing down when the power is 0
         leftFront.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
@@ -54,7 +58,7 @@ public class ScrimageTeleOp extends  LinearOpMode{
         // Mechanisms
         outtake = hardwareMap.get(DcMotor.class, "outtake");
         intake = hardwareMap.get(DcMotor.class, "intake");
-        transfer = hardwareMap.get(CRServo.class, "transfer");
+        transfer = hardwareMap.get(Servo.class, "transfer");
 
         //outtake.setDirection(DcMotorSimple.Direction.REVERSE);  // if applicable
         intake.setDirection(DcMotorSimple.Direction.REVERSE);   // if applicable
@@ -66,6 +70,7 @@ public class ScrimageTeleOp extends  LinearOpMode{
         outtake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        transfer.setPosition(transferRestPosition);
 
         telemetry.addLine("Initialized!");
 
@@ -136,13 +141,12 @@ public class ScrimageTeleOp extends  LinearOpMode{
                 intake.setPower(0);
             }
 
-            if(gamepad2.left_stick_y < 0.5){
-               transfer.setPower(transferPushPower);
-            } else if(gamepad2.left_stick_y > 0.5){
-                transfer.setPower(-transferPushPower);
-            } else{
-                transfer.setPower(0.0);
+            if(gamepad2.right_bumper){
+                position += amount;
+            } else if(gamepad2.left_bumper){
+                position -= amount;
             }
+            transfer.setPosition(position);
         }
     }
 }
