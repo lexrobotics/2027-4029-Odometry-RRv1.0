@@ -4,12 +4,14 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.CRServo;
 
 @TeleOp(name = "GTA drive", group = "TankDrive")
 public class GTADrive extends  LinearOpMode{
 
     private DcMotorEx leftBack, rightBack, leftFront, rightFront;
     private double motorVelocity = 2464.0/2;
+    private CRServo AmoolyaAwesomeServo;
     private boolean[] driveMode = {false, false};
 
     @Override
